@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>710bbe2a-a624-4d18-bf73-5a822e9ef68c</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>main.py</StartupFile>
+    <StartupFile>pfind_filter.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -22,8 +22,14 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="fdr.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="filter.py" />
-    <Compile Include="main.py" />
+    <Compile Include="mascot_filter.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="pfind_filter.py" />
     <Compile Include="simplely.py">
       <SubType>Code</SubType>
     </Compile>
@@ -32,13 +38,8 @@
     <Folder Include="data\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="data\20060502data06_CIDIT.mgf" />
-    <Content Include="data\20060502data06_CIDIT_1.mgf" />
-    <Content Include="data\20060502data06_CIDIT_2.mgf" />
     <Content Include="data\2017_05_19_16_52_12.spectra.txt" />
-    <Content Include="data\data.txt" />
     <Content Include="data\out.txt" />
-    <Content Include="data\spectra.txt" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
