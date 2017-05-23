@@ -1,2 +1,0 @@
-#	Spectrum	Uni_Pet	Samples	Score	Condition
-*	#,Spec	Peptide	SampleID	Mod_Sites	Score	Calc_M	Delta_M	ppm	Proteins
