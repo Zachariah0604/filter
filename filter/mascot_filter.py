@@ -2,6 +2,10 @@ import math
 import re
 from pfind_filter import *
 from collections import defaultdict
+import urllib.parse
+
+
+
 def getEvalue(list):
     return float(list[5])
 def get_peptide(str_):
@@ -80,7 +84,7 @@ def get_spectrum(str_,rf):
     for i in range(3):
         line=rf.readline()
         list_.append(line)
-    spectrum.append(list_[0].split('=')[1].strip('\n'))
+    spectrum.append(urllib.parse.unquote(list_[0].split('=')[1].strip('\n')))
     spectrum.append(list_[2].split('=')[1].strip('\n'))
     return spectrum
 def get_spectrum_dict(peptides,spectrums):
@@ -92,15 +96,18 @@ def get_spectrum_dict(peptides,spectrums):
             dic['charge2'].append([peptides[ti][0],spectrums[spec_index][1],peptides[ti][1],peptides[ti][2],peptides[ti][3],float(peptides[ti][4]),charge])
         if charge == 3:
             dic['charge3'].append([peptides[ti][0],spectrums[spec_index][1],peptides[ti][1],peptides[ti][2],peptides[ti][3],float(peptides[ti][4]),charge])
-    print('sort dict...')
+    #print('sort dict...')
     for di in range(2,4):
         dic['charge'+str(di)].sort(key=getEvalue,reverse = True)
-    print('complete')
+    #print('complete')
     return dic
-def main():
+def main(spath):
+    writeFile=open('data/mascot_out.txt','w')
+    writeFile.write('Spectrum\tPeptide\tMod_Sites\tProteins\tEvalue\tCharge\n')
+    writeFile.close()  
     peptides=[]
     spectrums=[]
-    with open('data//F001514.dat','r') as rf:
+    with open(spath,'r') as rf:
         while True:
             line=rf.readline()
             if not line:
@@ -114,9 +121,13 @@ def main():
                 spectrums.append(get_spectrum(line,rf))
     rf.close()
     dic=get_spectrum_dict(peptides,spectrums)
-    filter_with_fdr(0.01,dic,'data/mascot_out.txt',0)
-writeFile=open('data/mascot_out.txt','w')
-writeFile.write('Spectrum\tPeptide\tMod_Sites\tProteins\tEvalue\tCharge\n')
-writeFile.close()  
+    filter_with_fdr(0.01,dic,'data/mscot_out/filter_result/filter_mascot_result.txt',0)
+
 if __name__=='__main__':
-    main()
+    writeFile=open('data/mscot_out/filter_result/filter_mascot_result.txt','w')
+    writeFile.write('Spectrum\tPeptide\tMod_Sites\tProteins\tEvalue\tCharge\n')
+    writeFile.close()
+    paths=folder('data\mscot_out\mscot_search_out')
+    for spath in paths:
+        main(spath)
+        print(spath+' Complete filtration')

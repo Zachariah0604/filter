@@ -5,6 +5,7 @@ import os
 import os.path
 import re
 from fdr import *
+from exclude_pif import *
 class Spectrum():
     def __init__(self):
         self.Charge=2
@@ -57,19 +58,17 @@ def build_spectrum_list(spectrum_num,total_list,f):
                     continue
                 else:
                     total_list.append((str(spectrum_num)+'\t'+spectrum_data.Spectrum_Name+'\t'+select_list[i][2]+'\t'+select_list[i][3]+'\t'+select_list[i][4]+' '+str(select_list[i][1])+' '+str(spectrum_data.Charge)).split())
-                    print('[Spectrum'+str(spectrum_num)+']\tE-value='+str(spectrum_data.Evalue))
+                    #print('[Spectrum'+str(spectrum_num)+']\tE-value='+str(spectrum_data.Evalue))
                     break
         else:
             total_list.append((str(spectrum_num)+'\t'+spectrum_data.Spectrum_Name+'\t'+select_list[0][2]+'\t'+select_list[0][3]+'\t'+select_list[0][4]+' '+str(select_list[0][1])+' '+str(spectrum_data.Charge)).split())
-            print('[Spectrum'+str(spectrum_num)+']\tE-value='+str(spectrum_data.Evalue))
+          #  print('[Spectrum'+str(spectrum_num)+']\tE-value='+str(spectrum_data.Evalue))
 
-    else:
-       print('[Spectrum'+str(spectrum_num)+']\tValidCandidate=0\tfilted')
+    #else:
+       #print('[Spectrum'+str(spectrum_num)+']\tValidCandidate=0\tfilted')
     return total_list
 
-writeFile=open('data/pfind_out.txt','w')
-writeFile.write('Spectrum\tPeptide\tMod_Sites\tProteins\tEvalue\tCharge\n')
-writeFile.close()
+
 
 def get_spectrum_dict(total_list):
     dic=defaultdict(list)
@@ -78,17 +77,18 @@ def get_spectrum_dict(total_list):
             dic['charge2'].append(total_list[ti])
         if int(total_list[ti][6]) == 3:
             dic['charge3'].append(total_list[ti])
-    print('sort dict...')
+    #print('sort dict...')
     for di in range(2,4):
         dic['charge'+str(di)].sort(key=getEvalue)
-    print('complete')
+    #print('complete')
     return dic
 
 
 
-def main():
+def main(spath):
+    
     total_list=[]
-    rf=open('data/0.2017_05_19_16_52_12_qry.peptides.txt','r')
+    rf=open(spath,'r')
     while True:
         line=rf.readline()
         if not line:
@@ -97,7 +97,13 @@ def main():
             spectrum_num=int(re.sub("\D", "", line))
             total_list=build_spectrum_list(spectrum_num,total_list,rf)
     dic=get_spectrum_dict(total_list)
-    filter_with_fdr(0.01,dic,'data/pfind_out.txt',1)
+    filter_with_fdr(0.01,dic,'data/pfind_out/filter_result/filter_pfind_result.txt',1)
 
 if __name__=='__main__':
-    main()
+    writeFile=open('data/pfind_out/filter_result/filter_pfind_result.txt','w')
+    writeFile.write('Spectrum\tPeptide\tMod_Sites\tProteins\tEvalue\tCharge\n')
+    writeFile.close()
+    paths=folder('data\pfind_out\pfind_search_out\search_result')
+    for spath in paths:
+        main(spath)
+        print(spath+' Complete filtration')

@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>710bbe2a-a624-4d18-bf73-5a822e9ef68c</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>pfind_filter.py</StartupFile>
+    <StartupFile>module1.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -22,6 +22,12 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="coment_filter.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="exclude_pif.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="fdr.py">
       <SubType>Code</SubType>
     </Compile>
@@ -29,17 +35,28 @@
     <Compile Include="mascot_filter.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="merge_file.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="module1.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="module2.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="pfind_filter.py" />
     <Compile Include="simplely.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="tolerance.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="tri_result.py">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="data\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="data\2017_05_19_16_52_12.spectra.txt" />
-    <Content Include="data\out.txt" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
