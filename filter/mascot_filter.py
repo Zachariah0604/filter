@@ -87,6 +87,7 @@ def get_spectrum(str_,rf):
     spectrum.append(urllib.parse.unquote(list_[0].split('=')[1].strip('\n')))
     spectrum.append(list_[2].split('=')[1].strip('\n'))
     return spectrum
+#this
 def get_spectrum_dict(peptides,spectrums):
     dic=defaultdict(list)
     for ti in range(len(peptides)):

@@ -28,7 +28,7 @@ with open('data//2017_05_19_16_52_12.spectra.txt','r') as rf:
         spectrum_data.Proteins=line2.split()[9]
         spectrum_data.Charge=spectrum_data.Spectrum_Name.split('.')[3]
 
-        
+        ##
         spec_str=str(spectrum_num)+'\t'+spectrum_data.Spectrum_Name+'\t'+spectrum_data.Peptide+'\t'+spectrum_data.Mod_Sites+'\t'+spectrum_data.Proteins+'\t'+str(spectrum_data.Evalue)+'\t'+str(spectrum_data.Charge)+'\n'
         total_list.append(spec_str.split())
     rf.close()

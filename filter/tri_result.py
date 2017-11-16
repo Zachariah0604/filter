@@ -21,6 +21,7 @@ def get_feature_list(file):
                 evalues.append(line.split()[2])
                 charges.append(line.split()[3])
             else:
+                #################
                 evalues.append('-1')
                 charges.append('-1')
         rf.close()

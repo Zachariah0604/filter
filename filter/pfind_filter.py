@@ -17,7 +17,7 @@ class Spectrum():
 
 def getEvalue(list):
     return float(list[5])
-
+#
 def build_spectrum_list(spectrum_num,total_list,f):
     spec_base_list=[]
     for i in range(7):

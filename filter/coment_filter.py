@@ -15,7 +15,7 @@ def select_spectrum(peptide_list,max_score,total_list,spectrum_num,spectrum_name
     if len(select_list) > 1:
         for i in range(len(select_list)):
             proteinList=select_list[i][4].split(';')
-            t_cunt=0
+            t_cunt=0 #
             proten_count=len(proteinList)
             for j in range(proten_count):
                 protemp=proteinList[j]
